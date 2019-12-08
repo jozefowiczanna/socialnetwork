@@ -1,0 +1,83 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body {
+  background-image: linear-gradient(rgba(255,255,255,.2), rgba(255,255,255,.1)), url('../images/backgrounds/background.jpeg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  margin: 0;
+  height: 100vh;
+  font-family: 'Montserrat', sans-serif;
+  color: #333;
+}
+
+.wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+}
+
+.container {
+  background: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  margin: 50px 5px 20px;
+  width: 100%;
+  max-width: 350px;
+}
+
+.form {
+  display: none;
+  width: 100%;
+}
+
+.form--is-active {
+  display: block;
+}
+
+.form__title {
+  margin: 0 0 30px;
+  font-weight: 400;
+  text-align: center;
+}
+
+.form__input {
+  display: block;
+  padding: 5px;
+  margin: 5px 0;
+  width: 100%;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.form__btn {
+  display: block;
+  border: none;
+  background: hsl(208, 85%, 36%);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  margin: 30px auto 30px;
+  cursor: pointer;
+  transition: all .15s ease-in-out;
+}
+
+.form__btn:hover {
+  background: hsl(208, 80%, 46%);
+}
+
+.form__error {
+  color: red;
+  margin: 5px 0;
+  font-size: 15px;
+}
+
+.form__message {
+  color: #333;
+  font-size: 14px;
+  text-align: center;
+  margin: 0;
+}
