@@ -1,21 +1,24 @@
-window.addEventListener('DOMContentLoaded', (event) => {
-  
-const linkLogin = document.querySelector(".link-login-js");
-const formLogin = document.querySelector(".form-login-js");
+const nav = document.querySelector(".nav");
+let navIconsPosition = document.querySelector(".nav__menu").offsetTop - 5;
 
-const linkRegister = document.querySelector(".link-register-js");
-const formRegister = document.querySelector(".form-register-js");
+const moveNav = () => {
+  if (window.pageYOffset >= navIconsPosition && window.innerWidth <= 600) {
+    nav.style.transform = `translateY(-${navIconsPosition}px)`;
+  } else {
+    nav.style.transform = `translateY(0px)`;
+  }
+}
 
-linkLogin.addEventListener("click", function(e) {
-  e.preventDefault();
-  formLogin.classList.remove("form--is-active");
-  formRegister.classList.add("form--is-active");
-}, false)
-
-linkRegister.addEventListener("click", function(e) {
-  e.preventDefault();
-  formRegister.classList.remove("form--is-active");
-  formLogin.classList.add("form--is-active");
-}, false)
-
+window.addEventListener("resize", function() {
+  navIconsPosition = document.querySelector(".nav__menu").offsetTop - 5;
+  moveNav();
 });
+
+window.addEventListener("scroll", function() {
+  moveNav();
+});
+
+window.addEventListener("touchmove", function() {
+  moveNav();
+});
+

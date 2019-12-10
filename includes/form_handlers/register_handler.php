@@ -1,4 +1,6 @@
 <?php 
+
+$error_array = array();
   
 $fname = "";
 $lname = "";
@@ -6,7 +8,6 @@ $email = "";
 $email2 = "";
 $password = "";
 $password2 = "";
-$error_array = array();
 
 if(isset($_POST['register_button'])) {
 
@@ -38,16 +39,16 @@ if(isset($_POST['register_button'])) {
 
   // validate values
   if (strlen($fname) > 25 || strlen($fname) < 2) {
-    array_push($error_array, "First name must be between 2 and 25 characters") ;
+    $error_array['first_name_length'] = "First name must be between 2 and 25 characters";
   }
 
   if (strlen($lname) > 25 || strlen($lname) < 2) {
-    array_push($error_array, "Last name must be between 2 and 25 characters") ;
+    $error_array['last_name_length'] = "Last name must be between 2 and 25 characters";
   }
 
   // validate email
   if ($email != $email2) {
-    array_push($error_array, "Emails don't match");
+    $error_array['email_match'] = "Emails don't match";
   } else {
     if(filter_var($email, FILTER_VALIDATE_EMAIL)) {
       $email = filter_var($email, FILTER_VALIDATE_EMAIL);
@@ -56,30 +57,31 @@ if(isset($_POST['register_button'])) {
       $num_rows = mysqli_num_rows($email_check);
 
       if ($num_rows > 0) {
-        array_push($error_array, "Email already in use");
+        $error_array['email_use'] = "Email already in use";
       }
 
     } else {
-      array_push($error_array, "Invalid email format");
+      $error_array['email_invalid'] = "Invalid email format";
     }
   }
 
   if ($password != $password2) {
-    array_push($error_array, "Passwords don't match");
+    $error_array['password_match'] = "Passwords don't match";
+    // array_push($error_array, "Passwords don't match");
   } else {
     if (preg_match('/[^A-Za-z0-9]/', $password)) {
-      array_push($error_array, "Your password must contain only english characters or numbers");
+      $error_array['password_regex'] = "Your password must contain only english characters or numbers";
     }
   }
 
   if(strlen($password) > 30 || strlen($password) < 5) {
-    array_push($error_array, "Your password must be between 5 and 30 characters");
+    $error_array['password_length'] = "Your password must be between 5 and 30 characters";
   }
 
   // send form
   if(empty($error_array)) {
     $password = md5($password); // encrypt password before sending to database
-    // $password = password_hash($password, PASSWORD_BCRYPT); // encrypt password before sending to database
+    //TODO $password = password_hash($password, PASSWORD_BCRYPT); // encrypt password before sending to database
     
     $username = strtolower($fname . "_" . $lname);
     $check_username_query = mysqli_query($con, "SELECT username FROM users WHERE username='$username'");
@@ -106,7 +108,7 @@ if(isset($_POST['register_button'])) {
     }
     $sql = "INSERT INTO users VALUES (NULL, '$fname', '$lname', '$username', '$email', '$password', '$date', '$profile_pic', '0', '0', 'no', ',')";
     $query = mysqli_query($con, $sql);
-    $msg = "<p style=\"color: green\">Profile registered</p>";
+    $msg_registered = "<p style=\"color: green\">Profile registered</p>";
   }
 }
 
