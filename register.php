@@ -76,6 +76,7 @@ require 'includes/form_handlers/register_handler.php';
   </div>
 </div>
 
+<script src="assets/js/login.js"></script>
 <?php 
   require 'includes/footer.php';
 ?>

@@ -27,6 +27,8 @@ require 'includes/form_handlers/login_handler.php';
   </div>
 </div>
 
+<script src="assets/js/login.js"></script>
+
 <?php 
   require 'includes/footer.php';
 ?>
