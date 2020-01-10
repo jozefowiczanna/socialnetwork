@@ -1,6 +1,7 @@
 <?php 
-require 'includes/header.php';
-require 'includes/form_handlers/login_handler.php';
+require_once("includes/initialize.php");
+require(HEADER_FILE);
+require(LOGIN_HANDLER_FILE);
 ?>
 
 <div class="bg-image">

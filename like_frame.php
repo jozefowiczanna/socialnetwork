@@ -14,10 +14,10 @@
 </head>
 <body>
   <?php 
-  
-  include "config/config.php";
-  include "includes/classes/User.php";
-  include "includes/classes/Post.php";
+  require_once("includes/initialize.php");
+  require_once(CONFIG_FILE);
+  require(USER_FILE);
+  require(POST_FILE);
 
   if (isset($_SESSION['username'])) {
     $userLoggedIn = $_SESSION['username'];

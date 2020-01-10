@@ -1,5 +1,6 @@
 <?php 
-require 'config/config.php';
+require_once("includes/initialize.php");
+require_once(CONFIG_FILE);
 
 if (isset($_SESSION['username'])) {
   $userLoggedIn = $_SESSION['username'];
@@ -15,22 +16,27 @@ if (isset($_SESSION['username'])) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
-  <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"> -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <link rel="stylesheet" href="assets/css/jquery.Jcrop.css" type="text/css" />
   <link rel="stylesheet" href="assets/css/style.css">
   <title>Social media</title>
-  <script
+  <!-- <script
   src="https://code.jquery.com/jquery-3.4.1.min.js"
   integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-  crossorigin="anonymous"></script>
+  crossorigin="anonymous"></script> -->
+  <script src="assets/js/jquery-3.4.1.min.js"></script>
+  <script src="assets/js/jquery.Jcrop.js"></script>
+	<script src="assets/js/jcrop_bits.js"></script>
+
 </head>
 <body>
 
-<nav class="nav">
+<nav class="custom-nav">
   <div class="wrapper">
-    <div class="nav__container">
-      <ul class="nav__menu">
+    <div class="custom-nav__container">
+      <ul class="custom-nav__menu">
         <li class="menu__item">
-          <a href="#" class="menu__link">
+          <a href="messages.php" class="menu__link">
             <img src="assets/images/fontawesome/envelope-regular.svg" alt="icon" class="menu__icon">
           </a>
         </li>
@@ -60,11 +66,12 @@ if (isset($_SESSION['username'])) {
           </a>
         </li>
       </ul>
-      <div class="nav__search">
-        <input type="text" class="nav__search-input">
+      <div class="custom-nav__search">
+        <input type="text" class="custom-nav__search-input">
       </div>
     </div>
   </div>
 </nav>
 
 <div class="under-nav"></div>
+

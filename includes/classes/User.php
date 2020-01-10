@@ -80,6 +80,24 @@
       }
     }
 
+    public function getMutualFriendsNum($user_to_check) {
+      $logged_in_user_list = $this->user['friend_array'];
+      $logged_in_user_list = trim($logged_in_user_list, ",");
+      $logged_in_user_list = explode(",", $logged_in_user_list);
+      $query = mysqli_query($this->con, "SELECT friend_array FROM users WHERE username='$user_to_check'");
+      $row = mysqli_fetch_array($query);
+      $user_to_check_list = $row['friend_array'];
+      $mutual_friends_num = 0;
+
+      foreach ($logged_in_user_list as $friend) {
+        if (strpos($user_to_check_list, $friend)) {
+          $mutual_friends_num++;
+        } 
+      }
+
+      return $mutual_friends_num;
+    }
+
     public function didReceiveRequest($user_from) {
       $logged_in_user = $this->user['username'];
       $query = mysqli_query($this->con, "SELECT * FROM friend_requests WHERE user_to='$logged_in_user' AND user_from='$user_from'");

@@ -1,8 +1,9 @@
 <?php 
-require "config/config.php";
-include_once "includes/functions/functions.php";
-include "includes/classes/User.php";
-include "includes/classes/Post.php";
+require_once("includes/initialize.php");
+require_once(CONFIG_FILE);
+require(FUNCTIONS_FILE);
+require(USER_FILE);
+require(POST_FILE);
 
 if (isset($_SESSION['username'])) {
   $userLoggedIn = $_SESSION['username'];
@@ -21,22 +22,6 @@ if (isset($_SESSION['username'])) {
   <title></title>
 </head>
 <body class="comment-frame">
-
-
-  <script>
-
-    // TODO is this function really being used??
-    // function toggle() {
-    //   // TODO class name refactor to BEM, change inline css style.display to classes
-    //   var element = document.getElementById("comment_section");
-
-    //   if (element.style.display == "block") {
-    //     element.style.display = "none";
-    //   } else {
-    //     element.style.display = "block";
-    //   }
-    // }
-  </script>
 
   <?php 
 

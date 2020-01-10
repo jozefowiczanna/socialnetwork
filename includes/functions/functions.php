@@ -59,6 +59,7 @@ function get_timeframe($date_added) {
     }
   }
 
+  $time_message = str_replace(" ", "&nbsp;", $time_message);
   return $time_message;
 }
 ?>
