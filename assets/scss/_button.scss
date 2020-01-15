@@ -1,0 +1,55 @@
+/* =========================== button */
+
+.button {
+  display: block;
+  max-width: 250px;
+  width: 100%;
+  padding: 10px 20px;
+  margin: 10px auto;
+  background: hsl(208, 95%, 54%);
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: .15s all;
+}
+
+.button:hover {
+  background: hsl(208, 75%, 45%);
+}
+
+.button--neutral {
+  border: 1px solid hsl(0, 0%, 70%);
+  background: transparent;
+  color: hsl(0, 0%, 50%);
+}
+
+.button--neutral:hover {
+  color: hsl(0, 0%, 40%);
+  background: hsl(0, 0%, 95%);
+}
+
+.button--danger {
+  background: hsl(8, 80%, 45%);
+}
+
+.button--danger:hover {
+  background: hsl(8, 80%, 38%);
+}
+
+.button--success {
+  background: hsl(134, 61%, 41%);
+}
+.button--success:hover {
+  background: hsl(110, 61%, 35%)
+}
+
+.button--delete {
+  width: auto;
+  padding: 4px 9px;
+  position: absolute;
+  top: 0;
+  right: 10px;
+  margin: 0;
+}

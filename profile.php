@@ -1,8 +1,8 @@
 <?php 
   require_once("includes/initialize.php");
   require_once(HEADER_FILE);
-  require(MESSAGE_FILE);
-  require(USER_FILE);
+  // require(MESSAGE_FILE);
+  // require(USER_FILE);
 
   if (!isset($userLoggedIn)) {
     header("Location: login.php");
@@ -28,12 +28,12 @@
 
   if (isset($_POST['remove_friend'])) {
     $logged_in_user_obj->removeFriend($profile_username);
-    header("Location: $profile_username");
+    header("Location: profile.php?profile_username=$profile_username");
   }
 
   if (isset($_POST['add_friend'])) {
     $logged_in_user_obj->sendRequest($profile_username);
-    header("Location: $profile_username");
+    header("Location: profile.php?profile_username=$profile_username");
   }
 
   if (isset($_POST['respond_request'])) {
@@ -47,7 +47,7 @@
       $body = $_POST['message_body'];
       $date = date("Y-m-d H:i:s");
       $message_obj->sendMessage($profile_username, $body, $date);
-      header("Location: $profile_username");
+      header("Location:  profile.php?profile_username=$profile_username");
     }
   }
 ?>
@@ -76,7 +76,7 @@
         $logged_in_user_obj = new User($con, $userLoggedIn);
         $isFriend = $logged_in_user_obj->isFriend($profile_username);
         
-        echo "<form action='$profile_username' method='POST'>";
+        echo "<form action='profile.php?profile_username=$profile_username' method='POST'>";
         if ($userLoggedIn != $profile_username) {
           if ($isFriend) {
             echo '<button type="submit" name="remove_friend" class="button button--danger">Remove Friend</button>';

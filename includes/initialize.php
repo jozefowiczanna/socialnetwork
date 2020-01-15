@@ -7,15 +7,7 @@ define("FOOTER_FILE", PROJECT_PATH . "/includes/footer.php");
 define("USER_FILE", PROJECT_PATH . "/includes/classes/User.php");
 define("POST_FILE", PROJECT_PATH . "/includes/classes/Post.php");
 define("MESSAGE_FILE", PROJECT_PATH . "/includes/classes/Message.php");
+define("NOTIFICATION_FILE", PROJECT_PATH . "/includes/classes/Notification.php");
 define("LOGIN_HANDLER_FILE", PROJECT_PATH . "/includes/form_handlers/login_handler.php");
 define("REGISTER_HANDLER_FILE", PROJECT_PATH . "/includes/form_handlers/register_handler.php");
-
-// require_once(CONFIG_FILE);
-// require(FUNCTIONS_FILE);
-// require(HEADER_FILE);
-// require(FOOTER_FILE);
-// require(USER_FILE);
-// require(POST_FILE);
-// require(LOGIN_HANDLER_FILE);
-// require(REGISTER_HANDLER_FILE);
 ?>

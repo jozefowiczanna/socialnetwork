@@ -2,8 +2,6 @@
   require_once("includes/initialize.php");
   require(FUNCTIONS_FILE);
   require(HEADER_FILE);
-  require(USER_FILE);
-  require(POST_FILE);
   
   if (!isset($userLoggedIn)) {
     header("Location: login.php");

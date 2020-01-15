@@ -1,0 +1,158 @@
+/* ==================== nav */
+.custom-nav {
+  width: 100%;
+  position: fixed;
+  background-color: hsl(208, 95%, 54%);
+  padding: 10px;
+  transition: transform 0.5s;
+  z-index: 999;
+}
+
+.custom-nav__branding {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  background: #ffffff;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+}
+
+.custom-nav__logo {
+  display: inline-block;
+  color: hsl(208, 95%, 54%);
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.custom-nav__logo {
+  border-radius: 5px;
+  padding: 10px;
+  transition: all .15s ease-in-out;
+  margin: 0;
+} 
+
+.custom-nav__logo:hover {
+  background-color: hsl(208, 95%, 48%);
+} 
+
+.custom-nav__menu {
+  display: flex;
+  justify-content: center;
+  margin: 5px;
+  padding: 0;
+  list-style-type: none;
+}
+
+.menu__link {
+  position: relative;
+  color: #fff;
+  text-decoration: none;
+  display: flex;
+  padding: 5px 10px;
+  font-size: 22px;
+  transition: all .15s ease-in-out;
+  border-radius: 5px;
+}
+
+.menu__link:hover {
+  background-color: hsl(208, 95%, 48%);
+}
+
+.menu__icon {
+  width: 25px;
+  height: 25px;
+}
+
+.menu__notification {
+  display: inline-block;
+  background: red;
+  font-family: "Arial";
+  font-size: 13px;
+  font-weight: bold;
+  padding: 3px 8px;
+  border-radius: 10px;
+  top: -5px;
+  right: -5px;
+  position: absolute;
+  z-index: 99999;
+}
+
+.custom-nav__search {
+  width: 100%;
+  max-width: 700px;
+  display: flex;
+  align-items: center;
+}
+
+.custom-nav__search-input {
+  width: 100%;
+  border: none;
+  font-size: 14px;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.under-nav {
+  height: 91px;
+}
+
+@media (min-width: 700px) {
+  .custom-nav__container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .custom-nav__search {
+    order: 1;
+    margin-left: 10px;
+  }
+
+  .custom-nav__menu {
+    order: 2;
+  }
+
+  .under-nav {
+    height: 67px;
+  }
+}
+
+
+// ====== messages and notification window
+
+.fixed {
+  position: fixed;
+  width: 100%;
+  z-index: 9999;
+}
+
+.inner-fixed {
+  max-width: 1000px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.dropdown-data-window {
+  border-radius: 5px;
+  padding: 0px;
+  height: 0;
+  width: 0;
+  position: absolute;
+  top: 60px;
+  right: 10px;
+  background: #fff;
+  z-index: 9999;
+  border: 1px solid #DADADA;
+  padding: 20px;
+  display: none;
+}
+
+.dropdown-data-window.active {
+  padding: 15pxpx;
+  height: 250px;
+  width: 290px;
+  display: block;
+  overflow-y: auto;
+}

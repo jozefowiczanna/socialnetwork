@@ -1,5 +1,3 @@
-console.log(window.innerWidth);
-
 window.addEventListener("DOMContentLoaded", function() {
 
   if(window.innerWidth < 600) {

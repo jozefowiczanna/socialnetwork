@@ -1,6 +1,6 @@
 <?php 
-  include "includes/header.php";
-  include "includes/classes/User.php";
+  require_once("includes/initialize.php");
+  require_once(HEADER_FILE);
 ?>
 
 <div class="wrapper">

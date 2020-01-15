@@ -1,0 +1,44 @@
+/* ======================== comment frame */
+
+.comment-frame {
+  padding: 5px;
+}
+
+/* ======================== user_closed */
+
+.closed {
+  padding: 20px;
+}
+
+.closed__title, .request__title {
+  margin: 0;
+  font-size: 18px;
+}
+
+.closed__link {
+  color: hsl(208, 95%, 54%);
+}
+
+/* ======================= request */
+
+.request {
+  padding: 15px
+}
+
+.request p {
+  margin-bottom: 10px;
+}
+
+.form-request {
+  display: flex;
+}
+
+.form-request p {
+  margin: 0;
+}
+
+.form-request .button {
+  margin: 0 5px 5px 0;
+  width: auto;
+  padding: 5px 30px;
+}

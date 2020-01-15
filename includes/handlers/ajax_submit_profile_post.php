@@ -4,6 +4,7 @@
   require(FUNCTIONS_FILE);
   require(USER_FILE);
   require(POST_FILE);
+  require(NOTIFICATION_FILE);
   
   if (isset($_POST['post_body'])) {
     $post = new Post($con, $_SESSION['username']);

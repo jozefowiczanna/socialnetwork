@@ -34,6 +34,10 @@
         $returned_id = mysqli_insert_id($this->con);
 
         // insert notification
+        if ($user_to != "none") {
+          $notification = new Notification($this->con, $added_by);
+          $notification->insertNotification($returned_id, $user_to, "profile_post");
+        }
 
         // update post count for user
         $num_posts = $this->user_obj->getNumPosts();
@@ -75,7 +79,7 @@
             $user_to_obj = new User($this->con, $row['user_to']);
             $user_to_name = $user_to_obj->getFirstAndLastName();
             $user_to_name = str_replace(" ", "&nbsp;", $user_to_name);
-            $user_to = "to <a href='" . $row['user_to'] . "' class='post__profile-link'>" . $user_to_name . "</a>";
+            $user_to = "to <a href='profile.php?profile_username=" . $row['user_to'] . "' class='post__profile-link'>" . $user_to_name . "</a>";
           }
 
           // Check if user who posted has their account closed
@@ -139,11 +143,11 @@
             // TODO refactor to BEM
             // 'javascript:toggle$id ??'
             $str .= "<div class='post' onClick='javascript:toggle$id()'>
-                      <a href='$added_by' class='post__img-outer'>
+                      <a href='profile.php?profile_username=$added_by' class='post__img-outer'>
                         <img src='$profile_pic' class='post__img'>
                       </a>
                       <div class='post__info'>
-                        <a href='$added_by' class='post__profile-link'>$first_name $last_name </a> $user_to <span>$time_message</span>
+                        <a href='profile.php?profile_username=$added_by' class='post__profile-link'>$first_name $last_name </a> $user_to <span>$time_message</span>
                       </div>
                       <div id='post_body' class='post__body'>
                         $body
@@ -212,10 +216,7 @@
           else {
             $count++;
           }
-
-
-          // TODO wouldn't it be better to use User object (getFirstAndLastName() exists, getProfilePic() has to be added)
-          // it would be new User instance $added_by
+          
           $user_details_query = mysqli_query($this->con, "SELECT first_name, last_name, profile_pic FROM users WHERE username='$added_by'");
           $user_row = mysqli_fetch_array($user_details_query);
           $first_name = $user_row['first_name'];
@@ -249,14 +250,12 @@
             $button = "";
           }
 
-          // TODO refactor to BEM
-          // 'javascript:toggle$id ??'
           $str .= "<div class='post' onClick='javascript:toggle$id()'>
-                    <a href='$added_by' class='post__img-outer'>
+                    <a href='profile.php?profile_username=$added_by' class='post__img-outer'>
                       <img src='$profile_pic' class='post__img'>
                     </a>
                     <div class='post__info'>
-                      <a href='$added_by' class='post__profile-link'>$first_name $last_name </a> <span>$time_message</span>
+                      <a href='profile.php?profile_username=$added_by' class='post__profile-link'>$first_name $last_name </a> <span>$time_message</span>
                     </div>
                     <div id='post_body' class='post__body'>
                       $body

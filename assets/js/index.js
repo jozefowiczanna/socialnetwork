@@ -19,7 +19,6 @@ postModal.addEventListener("click", function(e) {
     postToBeDeletedId = null;
     postModal.classList.remove("modal--is-active");
   } else if (e.target == deletePostBtn) {
-    console.log(postToBeDeletedId);
     $.ajax({
       url: "includes/handlers/ajax_delete_post.php",
       type: "POST",
@@ -35,3 +34,4 @@ postModal.addEventListener("click", function(e) {
     });
   }
 });
+

@@ -18,6 +18,7 @@
   require_once(CONFIG_FILE);
   require(USER_FILE);
   require(POST_FILE);
+  require(NOTIFICATION_FILE);
 
   if (isset($_SESSION['username'])) {
     $userLoggedIn = $_SESSION['username'];
@@ -45,6 +46,12 @@
     $total_user_likes++;
     $update_user = mysqli_query($con, "UPDATE users SET num_likes='$total_user_likes' WHERE username='$post_author'");
     $insert_like = mysqli_query($con, "INSERT INTO likes VALUES(NULL, '$userLoggedIn', '$post_id')");
+
+    // insert notification
+    if ($post_author != $userLoggedIn) {
+      $notification = new Notification($con, $userLoggedIn);
+      $notification->insertNotification($post_id, $post_author, "like");
+    }
   }
 
   // Unlike button
