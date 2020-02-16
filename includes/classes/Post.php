@@ -104,7 +104,6 @@
               $count++;
             }
 
-
             // TODO wouldn't it be better to use User object (getFirstAndLastName() exists, getProfilePic() has to be added)
             // it would be new User instance $added_by
             $user_details_query = mysqli_query($this->con, "SELECT first_name, last_name, profile_pic FROM users WHERE username='$added_by'");
@@ -116,7 +115,6 @@
             ?>
             <script>
             function toggle<?php echo $id; ?>() {
-
               if (event.target.classList.contains("options__comments-nr")) {
                 var element = document.getElementById("toggleComment<?php echo $id; ?>");
                 if (element.style.display == "block") {
@@ -282,6 +280,82 @@
       }
 
       echo $str;
+    }
+
+    public function loadSinglePost($id) {
+
+      // prevent user from passing random string to url
+      if (is_numeric($id)) {
+        $userLoggedIn = $this->user_obj->getUsername();
+        $query = mysqli_query($this->con, "SELECT * FROM posts WHERE id='$id'");
+        $row = mysqli_fetch_array($query);
+  
+        $added_by_obj = new User($this->con, $row["added_by"]);
+        $added_by = $row['added_by'];
+        $isFriend = $this->user_obj->isFriend($added_by);
+        
+        // show my or my friend post if it's not deleted
+        if (($userLoggedIn == $added_by || $isFriend) && $row['deleted'] == "no") {
+          $profile_pic = $added_by_obj->getProfilePic();
+          $first_and_last_name = $added_by_obj->getFirstAndLastName();
+          $body = $row['body'];
+          $time_message = get_timeframe($row['date_added']);
+    
+          ?>
+    
+          <script>
+            function toggle<?php echo $id; ?>() {
+    
+              if (event.target.classList.contains("options__comments-nr")) {
+                var element = document.getElementById("toggleComment<?php echo $id; ?>");
+                if (element.style.display == "block") {
+                  element.style.display = "none";
+                } else {
+                  element.style.display = "block";
+                }
+              }
+            }
+          </script>
+    
+          <?php
+    
+          $comments_check = mysqli_query($this->con, "SELECT * FROM comments WHERE post_id='$id'");
+          $comments_check_num = mysqli_num_rows($comments_check);
+    
+          if ($userLoggedIn == $added_by) {
+            $button = "<button class='button button--delete button--danger' data-id='$id'>x</button>";
+          } else {
+            $button = "";
+          }
+    
+          $str = "<div class='post' onClick='javascript:toggle$id()'>
+                    <a href='profile.php?profile_username=$added_by' class='post__img-outer'>
+                      <img src='$profile_pic' class='post__img'>
+                    </a>
+                    <div class='post__info'>
+                      <a href='profile.php?profile_username=$added_by' class='post__profile-link'>$first_and_last_name </a> <span>$time_message</span>
+                    </div>
+                    <div id='post_body' class='post__body'>
+                      $body
+                    </div>
+    
+                    <div class='post__options options'>
+                      <span class='options__comments-nr'>Comments ($comments_check_num)&nbsp;&nbsp;&nbsp;
+                      <iframe src='like_frame.php?post_id=$id' scrolling='no' class='post__frame-likes'></iframe>
+                    </div>
+                    <div class='post__comment' id='toggleComment$id' style='display:none'>
+                      <iframe src='comment_frame.php?post_id=$id' class='post__frame-comments' id='comment_iframe' frameborder='0'></iframe>
+                    </div>
+                    $button
+                  </div>
+                  ";
+          return $str;
+        } else {
+          return "Post either doesn't exists or you're not friend with its author.";
+        }
+      } else {
+        return "Post doesn't exists.";
+      }
     }
   }
 

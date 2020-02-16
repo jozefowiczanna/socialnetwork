@@ -37,6 +37,19 @@ function css() {
     .pipe(browsersync.stream());
  }
 
-const watch = gulp.parallel([watchFiles, connectsync]);
+function cssCompile() {
+  return gulp
+  .src("./assets/scss/**/*.scss")
+  .pipe(plumber())
+  .pipe(sass({ outputStyle: "expanded" }))
+  .pipe(gulp.dest("./assets/css/"));
+}
 
-exports.default = watch;
+function watchCssFiles() {
+  gulp.watch("./assets/scss/**/*.scss", cssCompile);
+}
+
+const watch = gulp.parallel([watchFiles, connectsync]);
+const watchCss = gulp.parallel([watchCssFiles]);
+
+exports.default = watchCss;

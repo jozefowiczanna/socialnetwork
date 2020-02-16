@@ -44,6 +44,8 @@ if (isset($_SESSION['username'])) {
 </head>
 <body>
 
+<input class="username" type="hidden" data-user='<?php echo $userLoggedIn; ?>'>
+
 <nav class="custom-nav">
   <div class="wrapper">
     <div class="custom-nav__container">
@@ -55,8 +57,8 @@ if (isset($_SESSION['username'])) {
         </li>
         <li class="menu__item">
           <!-- TODO change onclick to event listner -->
-          <a href="#" class="menu__link" onclick="getDropdownData('<?php echo $userLoggedIn; ?>', 'message')">
-            <img src="assets/images/fontawesome/envelope-regular.svg" alt="icon" class="menu__icon">
+          <a href="#" class="menu__link js-message-btn" data-dropdown-handler="true">
+            <img src="assets/images/fontawesome/envelope-regular.svg" alt="icon" class="menu__icon" data-dropdown-handler="true">
             <?php 
               if ($num_messages > 0) {
                 echo '<span class="menu__notification js-num-messages">' . $num_messages . '</span>';
@@ -65,8 +67,8 @@ if (isset($_SESSION['username'])) {
           </a>
         </li>
         <li class="menu__item">
-          <a href="#" class="menu__link" onclick="getDropdownData('<?php echo $userLoggedIn; ?>', 'notification')">
-            <img src="assets/images/fontawesome/bell-regular.svg" alt="icon" class="menu__icon">
+          <a href="#" class="menu__link js-notification-btn" data-dropdown-handler="true">
+            <img src="assets/images/fontawesome/bell-regular.svg" alt="icon" class="menu__icon" data-dropdown-handler="true">
             <?php 
               if ($num_notifications > 0) {
                 echo '<span class="menu__notification js-num-notifications">' . $num_notifications . '</span>';
@@ -90,8 +92,26 @@ if (isset($_SESSION['username'])) {
           </a>
         </li>
       </ul>
-      <div class="custom-nav__search">
-        <input type="text" class="custom-nav__search-input">
+      <div class="search">
+        <form action="search.php" method="GET" class="search__form js-search-form" name="search-form">
+          <input type="text" name="search" class="search__input js-search-input" data-dropdown-handler="true" autocomplete="off">
+          <button class="search__btn" type="submit">
+            <img src="assets/images/fontawesome/search-24px.svg" alt="icon" class="menu__icon">
+          </button>
+        </form>
+
+        <div class="search__results  js-search-results">
+          <div class="result">
+            <a href="profile.php?profile_username=britney_kennedy" class="result__link">
+            <img src="assets/images/profile_pics/defaults/head_deep_blue.png" class="result__img">  
+            Britney Kennedy
+            </a>
+            <a href="profile.php?profile_username=britney_kennedy" class="result__link">
+            <img src="assets/images/profile_pics/defaults/head_deep_blue.png" class="result__img">  
+            Stefan Brzęczyszczykiewicz
+            </a>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -121,7 +141,6 @@ if (isset($_SESSION['username'])) {
           if ((scrollTop + innerHeight >= dropdownWindowEl[0].scrollHeight) && noMoreData == 'false') {
 
             var pageName; // Holds name of page to send ajax request to
-            var pageName;
             
             var type = dropdownTypeEl.val();
             if (type == 'notification') {
@@ -138,7 +157,7 @@ if (isset($_SESSION['username'])) {
 
               success: function(response) {
                 dropdownWindowEl.find('.nextPageDropdownData').remove(); // Removes current .nextPageDropdownData
-                dropdownWindowEl.find('.noMoreData').remove(); // Removes current .noMoreData
+                dropdownWindowEl.find('.noMoreDropdownData').remove(); // Removes current .noMoreData
                 dropdownWindowEl.append(response);
               }
             });

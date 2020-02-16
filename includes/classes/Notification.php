@@ -61,10 +61,10 @@ class Notification {
 
       
       $opened = $row['opened'];
-      $style = ($opened == 'no') ? "background-color: #DDEDFF;" : "";
+      $class = ($opened == 'no') ? "conv--unopened" : "";
 
       $return_string .= "
-      <div class='conv'>
+      <div class='conv $class'>
         <a href='" . $row['link'] . "' class='conv__link'>
           <img src='" . $user_data['profile_pic'] . "' alt='profile picture' class='conv__img'>
           <div>
